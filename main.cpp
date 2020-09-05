@@ -48,16 +48,15 @@ void course_credit_manage()
 {
     cout << "------- Course Credit Manage --------- \n";
     int size = 0;
-    int n = size + 1;
-    int sum = 0;
     do {
         cout << "Enter Size [6,15]:";
         cin >> size;
-    } while (size < 6 && size > 15);
-    
+    } while (size < 6 && size > 16);
+    int n = size + 1;
+    int sum = 0;
     Course C[size];
     while (size > 0) {
-        cout << "--------- Course N0" << n - size << endl;
+        cout << "--------- Course N0" << n - size << "------------"<< endl;
         cout << "Enter The Credit:";
         cin >> C[n - size - 1].credit;
         cout << "Enter The Title: ";
@@ -90,8 +89,8 @@ marks_manage_create()
     cin >> size;
     int n = size + 1;
     while (size){
-        cout << "Enter The Title of Course " << n - size << ":"<< C[n - size].Title;
-        cout << "Enter The Mark of the Student in Course" << n- size << ":"<< C[n - size].Mark;
+        cout << "Enter The Title of Course " << n - size << ":"<< C[n - size].Title<<endl;
+        cout << "Enter The Mark of the Student in Course" << n- size << ":"<< C[n - size].Mark<<endl;
         lenght += 1;
         size --;
     }
