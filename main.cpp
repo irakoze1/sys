@@ -399,7 +399,7 @@ bool loop=true;
                 nst=stundent_manage_creat();
                 break;
             case 2:
-                 cout<< "Enter the number n of students to display> ";
+                 cout<< "Enter the number n of students to display: ";
                  cin>>n;
                 student_manage_display(nst,n);
                  break;
@@ -478,7 +478,7 @@ void handle()
                 loop=false;
                 
             default:
-                cout << "Choice Invalid";
+                cout << "Good Bye!!!!";
                 break;
         }
     }
