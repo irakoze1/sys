@@ -358,7 +358,7 @@ student_bad_mark_course(vector<Student> v)
  }
 void student_manage_menu(){
 bool loop=true;
-    vector<Student> nst;
+    vector<Student> Nst;
     TextTable t('-', '|', '#');
     t.add("Marks Manage Menu");
     TextTable menu('-', ' ', ' ');
@@ -396,21 +396,21 @@ bool loop=true;
         cin >> choice;
         switch (choice) {
             case 1:
-                nst=stundent_manage_creat();
+                Nst=stundent_manage_creat();
                 break;
             case 2:
-                 cout<< "Enter the number n of students to display: ";
-                 cin>>n;
-                student_manage_display(nst,n);
+                 cout<< "Enter the number N of students to display: ";
+                 cin >> n;
+                student_manage_display(Nst,n);
                  break;
             case 3:
-                student_av_mark_course(nst);
+                student_av_mark_course(Nst);
                  break;
             case 4:
-                student_best_mark_course(nst);
+                student_best_mark_course(Nst);
                  break;
             case 5:
-                student_bad_mark_course(nst);
+                student_bad_mark_course(Nst);
                   break;
             case 6:
                   cout<< "coming soon\n";
@@ -486,7 +486,7 @@ void handle()
 
 
 void
-print_vec(std::vector<int> v)
+print_vec(vector<int> v)
 {
     int r = v.size();
     int n = r;
@@ -502,7 +502,7 @@ void
 marks_menu()
 {
     Course *marks = nullptr;
-    std::vector<int> v;
+    vector<int> v;
     bool loop = true;
     int capture;
     TextTable t('-', '|', '#');
