@@ -201,7 +201,7 @@ void student_manage()
     cin >> D.day;
     assert(D.Valid() && "The date is note Valid");
     D.print();
-    cout << " --------------------Create Student---------------------- ";
+    cout << " --------------------Create Student----------------------\n ";
     cout << "Enter Name:";
     string name;
     cin >> name;
@@ -215,17 +215,18 @@ void student_manage()
     int r = 0;
     cin >> r;
     int size =  0;
-    int n = size + 1;
-    do {
+      do {
         cout << "Enter Size [6,15]:";
         cin >> size;
-    } while (size > 6 && size < 15);
-    
+    } while (size < 6 && size > 15);
+    int n = size + 1;
     Course cc[size];
     while (size > 0) {
         cout << "------ Course N "<< n - size << endl;
         cout << "Enter The Credit :";
+        do{
         cin >> cc[n - size - 1].credit;
+        } while(cc[n - size - 1].credit < 2 && cc[n - size - 1].credit > 5); 
         cout << "Enter The Title: ";
         cin >> cc[n - size - 1].Title;
         cout << "Enter Mark:";
