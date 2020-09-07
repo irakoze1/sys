@@ -51,7 +51,7 @@ void course_credit_manage()
     do {
         cout << "Enter Size [6,15]:";
         cin >> size;
-    } while (size < 6 && size > 15);
+    } while (size < 6 || size > 15);
     int n = size + 1;
     int sum = 0;
     Course C[size];
