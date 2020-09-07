@@ -14,7 +14,7 @@
 using namespace std;
 
 void menu_Display();
-void handle();
+void principal();
 void print_vec(vector<int> v);
 int lenght = 0;
 
@@ -51,7 +51,7 @@ void course_credit_manage()
     do {
         cout << "Enter Size [6,15]:";
         cin >> size;
-    } while (size < 6 && size > 16);
+    } while (size < 6 && size > 15);
     int n = size + 1;
     int sum = 0;
     Course C[size];
@@ -65,14 +65,14 @@ void course_credit_manage()
         sum += C[n - size - 1].credit;
         size--;
     }
-    assert(sum == 30 && "Credit Must be equal 30");
+    if(sum == 30) cout << "Credit Must be equal 30"<<endl;
     size = n - 1;
     
     cout << "-----------------Result--------------"<<endl;
     while (size > 0) {
         cout << "Course " << n - size << "Title" << C[n - size - 1].Title;
-        cout << "Course " << n -size << " Credit: "<< C[n- size - 1].credit;
-        
+        cout << "Course " << n - size << " Credit: "<< C[n- size - 1].credit;
+        size--;
     }
 }
 
@@ -84,13 +84,13 @@ marks_manage_create()
     lenght = 0;
     int size = 0;
     Course *C = new Course();
-    cout << "--------- Course Marks To Manage -----"<<endl;
+    cout << "--------- Course Marks To Manage -------"<<endl;
     cout << "Enter Number of Course:";
     cin >> size;
     int n = size + 1;
     while (size){
-        cout << "Enter The Title of Course " << n - size << ":"<< C[n - size].Title<<endl;
-        cout << "Enter The Mark of the Student in Course" << n- size << ":"<< C[n - size].Mark<<endl;
+        cout << "Enter The Title of Course " << n - size << ":"; cin >> C[n - size - 1].Title;
+        cout << "Enter The Mark of the Student in Course" << n - size << ":"; cin >> C[n - size - 1].Mark;
         lenght += 1;
         size --;
     }
@@ -199,9 +199,9 @@ void student_manage()
     cin >> D.month;
     cout << "Enter Day:";
     cin >> D.day;
-    assert(D.Valid() && "The date is note Valid");
+    if(D.Valid()) cout << "The date is not Valid"<<endl;
     D.print();
-    cout << " --------------------Create Student----------------------\n ";
+    cout << " --------------------Create a new Student----------------------\n ";
     cout << "Enter Name:";
     string name;
     cin >> name;
@@ -216,24 +216,24 @@ void student_manage()
     cin >> r;
     int size =  0;
       do {
-        cout << "Enter Size [6,15]:";
+        cout << "Enter Size [6,15] of Course:";
         cin >> size;
     } while (size < 6 && size > 15);
     int n = size + 1;
-    Course cc[size];
+    Course C[size];
     while (size > 0) {
         cout << "------ Course N "<< n - size << endl;
         cout << "Enter The Credit :";
         do{
-        cin >> cc[n - size - 1].credit;
-        } while(cc[n - size - 1].credit < 2 && cc[n - size - 1].credit > 5); 
+        cin >> C[n - size - 1].credit;
+        } while(C[n - size - 1].credit < 2 && C[n - size - 1].credit > 5);
         cout << "Enter The Title: ";
-        cin >> cc[n - size - 1].Title;
+        cin >> C[n - size - 1].Title;
         cout << "Enter Mark:";
-        cin >> cc[n - size -1].Mark;
+        cin >> C[n - size - 1].Mark;
         size--;
     }
-    Student S = Student(r, name, username, address, cc, D);
+    Student S = Student(r, name, username, address, C, D);
     cout << "Name:" << S.name << endl;
     cout << "UserName:" << S.username << endl;
     cout << "Address:" << S.address << endl;
@@ -274,9 +274,9 @@ stundent_manage_creat()
     cin >> n;
     int m = n + 1;
     int regstNum = 0;
-    char *name = new char();
-    char *surname = new char();
-    char *address = new char();
+    string name;
+    string surname;
+    string address;
     Date dt;
     Course *course_marks = new Course();
     assert(n > 0 && "Size must be greater than 0");
@@ -458,7 +458,7 @@ void menu_Display()
 }
 
 
-void handle()
+void principal()
 {
     bool loop = true;
     while (loop) {
@@ -580,5 +580,5 @@ int main()
 {
     cout<< "School Managemt system"<<endl;
     menu_Display();
-    handle();
+    principal();
 }
