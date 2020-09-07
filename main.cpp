@@ -218,7 +218,7 @@ void student_manage()
       do {
         cout << "Enter Size [6,15] of Course:";
         cin >> size;
-    } while (size < 6 && size > 15);
+    } while (size < 6 || size > 15);
     int n = size + 1;
     Course C[size];
     while (size > 0) {
@@ -226,7 +226,7 @@ void student_manage()
         cout << "Enter The Credit :";
         do{
         cin >> C[n - size - 1].credit;
-        } while(C[n - size - 1].credit < 2 && C[n - size - 1].credit > 5);
+        } while(C[n - size - 1].credit < 2 || C[n - size - 1].credit > 5);
         cout << "Enter The Title: ";
         cin >> C[n - size - 1].Title;
         cout << "Enter Mark:";
