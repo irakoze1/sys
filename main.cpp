@@ -58,7 +58,7 @@ void course_credit_manage()
     while (size > 0) {
         cout << "--------- Course N0" << n - size << "------------"<< endl;
         cout << "Enter The Credit:";
-        cin >> C[n - size - 1].credit;
+        do{cin >> C[n - size - 1].credit;}while(C[n - size - 1].credit < 2 || C[n - size - 1].credit > 5);
         cout << "Enter The Title: ";
         cin >> C[n - size - 1].Title;
         
@@ -90,7 +90,8 @@ marks_manage_create()
     int n = size + 1;
     while (size){
         cout << "Enter The Title of Course " << n - size << ":"; cin >> C[n - size - 1].Title;
-        cout << "Enter The Mark of the Student in Course" << n - size << ":"; cin >> C[n - size - 1].Mark;
+        cout << "Enter The Mark of the Student in Course" << n - size << ":";
+        do{cin >> C[n - size - 1].Mark;}while(C[n - size - 1].Mark < 0 || C[n - size - 1].Mark > 20);
         lenght += 1;
         size --;
     }
