@@ -56,9 +56,12 @@ void course_credit_manage()
     int sum = 0;
     Course C[size];
     while (size > 0) {
-        cout << "--------- Course N0" << n - size << "------------"<< endl;
-        cout << "Enter The Credit:";
-        do{cin >> C[n - size - 1].credit;}while(C[n - size - 1].credit < 2 || C[n - size - 1].credit > 5);
+        cout << "--------- Course N0" << n - size <<"------------"<< endl;
+        
+        do{
+                cout << "Enter The Credit [2,5]:";
+                cin >> C[n - size - 1].credit;
+        }while(C[n - size - 1].credit < 2 || C[n - size - 1].credit > 5);
         cout << "Enter The Title: ";
         cin >> C[n - size - 1].Title;
         
@@ -68,7 +71,7 @@ void course_credit_manage()
     if(sum != 30) cout << "Credit Must be equal 30"<<endl;
     size = n - 1;
     
-    cout << "-----------------Result--------------"<<endl;
+    cout << "----------------- Result --------------"<<endl;
     while (size > 0) {
         cout << "Course " << n - size << " Title: " << C[n - size - 1].Title<<endl;
         cout << "Course " << n - size << " Credit: "<< C[n- size - 1].credit<<endl;
@@ -90,8 +93,11 @@ marks_manage_create()
     int n = size + 1;
     while (size){
         cout << "Enter The Title of Course " << n - size << ":"; cin >> C[n - size - 1].Title;
-        cout << "Enter The Mark of the Student in Course" << n - size << ":";
-        do{cin >> C[n - size - 1].Mark;}while(C[n - size - 1].Mark < 0 || C[n - size - 1].Mark > 20);
+
+         do{
+            cout << "Enter The Mark [0,20] of the Student in Course" << n - size << ":";
+            cin >> C[n - size - 1].Mark;
+        }while(C[n - size - 1].Mark < 0 || C[n - size - 1].Mark > 20);
         lenght += 1;
         size --;
     }
@@ -202,7 +208,7 @@ void student_manage()
     cin >> D.day;
     if(D.Valid()) cout << "The date is not Valid"<<endl;
     D.print();
-    cout << " --------------------Create a new Student----------------------\n ";
+    cout << " -------------------- Create a new Student ----------------------\n ";
     cout << "Enter Name:";
     string name;
     cin >> name;
@@ -223,10 +229,11 @@ void student_manage()
     int n = size + 1;
     Course C[size];
     while (size > 0) {
-        cout << "------ Course N "<< n - size << endl;
-        cout << "Enter The Credit :";
+        cout << "---------- Course N"<< n - size<<" -------------" << endl;
+
         do{
-        cin >> C[n - size - 1].credit;
+            cout << "Enter The Credit :";
+            cin >> C[n - size - 1].credit;
         } while(C[n - size - 1].credit < 2 || C[n - size - 1].credit > 5);
         cout << "Enter The Title: ";
         cin >> C[n - size - 1].Title;
@@ -236,7 +243,7 @@ void student_manage()
     }
     Student S = Student(r, name, username, address, C, D);
     student_display(S);
-    cout << "Do You Wish To Modify Student Characteristics?Yes/No";
+    cout << "Do You Wish To Modify Student Characteristics? Yes/No ";
     string Answer;
     cin >> Answer;
     if (Answer == "yes" || Answer == "y" || Answer == "Yes") {
@@ -288,7 +295,7 @@ stundent_manage_creat()
     Course *course_marks = new Course();
     assert(n > 0 && "Size must be greater than 0");
     while (n) {
-        cout<< "---- Student number ----" << m - n << "\n";
+        cout<< "---------- Student number :" << m - n << " -------------\n";
         cout<< "Enter the name:";
         cin >> name;
         cout<< "Enter the surname:";
@@ -369,7 +376,7 @@ bool loop=true;
     vector<Student> Nst;
     TextTable t('-', '|', '#');
     t.add("Marks Manage Menu");
-    TextTable menu('-', ' ', ' ');
+    TextTable menu('-', '|', '+');
     t.endOfRow();
     menu.add("Enter 1 for");
     menu.add("Student Manage Creation");
@@ -392,7 +399,7 @@ bool loop=true;
     menu.add("Enter 7 for");
     menu.add("Bad Student Management Of Each Course");
     menu.add("Enter 8 to");
-    menu.add("CLose");
+    menu.add("Close");
     menu.endOfRow();
     menu.setAlignment(0, TextTable::Alignment::LEFT);
     t.setAlignment(2, TextTable::Alignment::LEFT);
