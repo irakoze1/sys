@@ -30,7 +30,7 @@ class Course
 public:
     int credit;
     char Title[20];
-    int Mark;    
+    float Mark;    
 };
 class Student
 {
