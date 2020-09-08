@@ -65,7 +65,7 @@ void course_credit_manage()
         sum += C[n - size - 1].credit;
         size--;
     }
-    if(sum == 30) cout << "Credit Must be equal 30"<<endl;
+    if(sum != 30) cout << "Credit Must be equal 30"<<endl;
     size = n - 1;
     
     cout << "-----------------Result--------------"<<endl;
