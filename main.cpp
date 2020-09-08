@@ -42,7 +42,7 @@ vector<int>
 marks_bellow_av(Course *size);
 vector<int>
 marks_above_av(Course *size);
-
+void student_display(Student S);
 
 void course_credit_manage()
 {
@@ -70,8 +70,8 @@ void course_credit_manage()
     
     cout << "-----------------Result--------------"<<endl;
     while (size > 0) {
-        cout << "Course " << n - size << "Title" << C[n - size - 1].Title;
-        cout << "Course " << n - size << " Credit: "<< C[n- size - 1].credit;
+        cout << "Course " << n - size << " Title: " << C[n - size - 1].Title<<endl;
+        cout << "Course " << n - size << " Credit: "<< C[n- size - 1].credit<<endl;
         size--;
     }
 }
@@ -235,17 +235,22 @@ void student_manage()
         size--;
     }
     Student S = Student(r, name, username, address, C, D);
-    cout << "Name:" << S.name << endl;
-    cout << "UserName:" << S.username << endl;
-    cout << "Address:" << S.address << endl;
-    cout << "Registration Number:" << S.regstNum << endl;
-    S.date_Birth.print();
+    student_display(S);
     cout << "Do You Wish To Modify Student Characteristics?Yes/No";
     string Answer;
     cin >> Answer;
     if (Answer == "yes" || Answer == "y" || Answer == "Yes") {
         change_character(S);
     }
+}
+
+void student_display(Student S){
+    cout<<"\n\n";
+    cout << "Name:" << S.name << endl;
+    cout << "UserName:" << S.username << endl;
+    cout << "Address:" << S.address << endl;
+    cout << "Registration Number:" << S.regstNum << endl;
+    S.date_Birth.print();
 }
 
 void change_character(Student S)
@@ -264,6 +269,7 @@ void change_character(Student S)
     cin >> S.date_Birth.month;
     cout << "Day:";
     cin >> S.date_Birth.day;
+    student_display(S);
 }
 
 vector<Student>
@@ -457,8 +463,6 @@ void menu_Display()
     t.setAlignment(2, TextTable::Alignment::LEFT);
     cout << t << menu;
 }
-
-
 void principal()
 {
     bool loop = true;
@@ -472,13 +476,16 @@ void principal()
                 break;
             case 2:
                 student_manage();
+                break;
             case 3:
                 marks_menu();
+                break;
             case 4:
                 student_manage_menu();
+                break;
             case 5:
                 loop=false;
-                
+                break;
             default:
                 cout << "Good Bye!!!!";
                 break;
