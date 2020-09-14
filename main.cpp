@@ -107,7 +107,7 @@ void marks_Display(Course *size)
 {
     int l = lenght;
     while (l) {
-        cout << lenght - l + 1 << "Title:" << size[lenght - l].Title << ", Marks: " << size[lenght - l].Mark << endl;
+        cout << lenght - l + 1 << ". Title: " << size[lenght - l].Title << ", Marks: " << size[lenght - l].Mark << endl;
         l--;
     }
 }
@@ -237,16 +237,20 @@ void student_manage()
         } while(C[n - size - 1].credit < 2 || C[n - size - 1].credit > 5);
         cout << "Enter The Title: ";
         cin >> C[n - size - 1].Title;
-        cout << "Enter Mark:";
-        cin >> C[n - size - 1].Mark;
+
+        do{
+            cout << "Enter Mark:";
+            cin >> C[n - size - 1].Mark;
+        } while(C[n - size - 1].Mark < 0 || C[n - size - 1].Mark > 15);
+       
         size--;
     }
     Student S = Student(r, name, username, address, C, D);
     student_display(S);
-    cout << "Do You Wish To Modify Student Characteristics? Yes/No ";
+    cout << "Do You Wish To Modify Student Characteristics? Yes/No :";
     string Answer;
     cin >> Answer;
-    if (Answer == "yes" || Answer == "y" || Answer == "Yes") {
+    if (Answer == "yes" || Answer == "y"  || Answer == "Y" || Answer == "Yes") {
         change_character(S);
     }
 }
@@ -300,6 +304,8 @@ stundent_manage_creat()
         cin >> name;
         cout<< "Enter the surname:";
         cin >> surname;
+        cout<< "Enter the Adrress:";
+        cin >> address;
         cout<< "Enter the Registration Number:";
         cin >> regstNum;
         cout<< "Enter the day of birth:";
@@ -327,7 +333,7 @@ void student_manage_display(vector<Student> v, int n)
         cout << "Address:" << v[n - m].address << endl;
         v[n - m].date_Birth.print();
         cout << "--------------- Course ------------"<<endl;
-        marks_Display(v[n - m].courseMark);
+        marks_Display(v[ n - m ].courseMark);
         m--;
         
     }
@@ -385,7 +391,7 @@ bool loop=true;
     menu.add("Student Manage Display");
     menu.endOfRow();
     menu.add("Enter 3 for");
-    menu.add("Student Manage Average Of Each Student");
+    menu.add("Student Manage Average Of Each Students");
     menu.endOfRow();
     menu.add("Enter 4 for");
     menu.add("Best Student Manage Of Each Student");
@@ -398,6 +404,7 @@ bool loop=true;
     menu.endOfRow();
     menu.add("Enter 7 for");
     menu.add("Bad Student Management Of Each Course");
+    menu.endOfRow();
     menu.add("Enter 8 to");
     menu.add("Close");
     menu.endOfRow();
@@ -407,7 +414,7 @@ bool loop=true;
     int choice;
     int n;
     while (loop) {
-        cout << "Enter your choice> ";
+        cout << "Enter your choice :";
         cin >> choice;
         switch (choice) {
             case 1:
@@ -597,3 +604,4 @@ int main()
     menu_Display();
     principal();
 }
+
