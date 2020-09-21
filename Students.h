@@ -8,6 +8,7 @@
 
 #ifndef Students_h
 #define Students_h
+#include "rang.hpp"
 using namespace std;
 
 class Date
@@ -21,7 +22,7 @@ public:
     }
     void print()
     {
-        cout << "Current date is :" << year << " "  << " " << month << " " << day << endl;
+        cout << rang::fg::green << "Current date is :" << year << " "  << " " << month << " " << day << endl;
     }
 
 };

@@ -7,12 +7,14 @@
 //
 #include <iostream>
 #include <cassert>
-#include "Stundets.h"
+#include "Students.h"
 #include <vector>
 #include <cstring>
 #include "TextTable.h"
+//#include "rang.hpp"
 using namespace std;
 
+//Declare All procedure and function we need
 void menu_Display();
 void principal();
 void print_vec(vector<int> v);
@@ -43,38 +45,40 @@ marks_bellow_av(Course *size);
 vector<int>
 marks_above_av(Course *size);
 void student_display(Student S);
+//End off
 
+//create course
 void course_credit_manage()
 {
-    cout << "------- Course Credit Manage --------- \n";
+    cout << rang::fg::green << "------- Course Credit Manage --------- \n";
     int size = 0;
     do {
-        cout << "Enter Size [6,15]:";
+        cout << rang::fg::green << "Enter Size [6,15]:";
         cin >> size;
     } while (size < 6 || size > 15);
     int n = size + 1;
     int sum = 0;
     Course C[size];
     while (size > 0) {
-        cout << "--------- Course N0" << n - size <<"------------"<< endl;
+        cout << rang::fg::green << "--------- Course N0" << n - size <<" ------------"<< endl;
         
         do{
-                cout << "Enter The Credit [2,5]:";
+                cout << rang::fg::green << "Enter The Credit [2,5]:";
                 cin >> C[n - size - 1].credit;
         }while(C[n - size - 1].credit < 2 || C[n - size - 1].credit > 5);
-        cout << "Enter The Title: ";
+        cout << rang::fg::green << "Enter The Title: ";
         cin >> C[n - size - 1].Title;
         
         sum += C[n - size - 1].credit;
         size--;
     }
-    if(sum != 30) cout << "Credit Must be equal 30"<<endl;
+    if(sum != 30) cout <<rang::fg::red << "Credit Must be equal 30 "<<endl;
     size = n - 1;
     
-    cout << "----------------- Result --------------"<<endl;
+    cout << rang::fg::green << "----------------- Result --------------"<<endl;
     while (size > 0) {
-        cout << "Course " << n - size << " Title: " << C[n - size - 1].Title<<endl;
-        cout << "Course " << n - size << " Credit: "<< C[n- size - 1].credit<<endl;
+        cout << rang::fg::green << "Course " << n - size << " Title: " << C[n - size - 1].Title<<endl;
+        cout << rang::fg::green << "Course " << n - size << " Credit: "<< C[n- size - 1].credit<<endl;
         size--;
     }
 }
@@ -87,15 +91,15 @@ marks_manage_create()
     lenght = 0;
     int size = 0;
     Course *C = new Course();
-    cout << "--------- Course Marks To Manage -------"<<endl;
-    cout << "Enter Number of Course:";
+    cout << rang::fg::green<< "--------- Course Marks To Manage -------"<<endl;
+    cout << rang::fg::green<< "Enter Number of Course:";
     cin >> size;
     int n = size + 1;
     while (size){
-        cout << "Enter The Title of Course " << n - size << ":"; cin >> C[n - size - 1].Title;
+        cout << rang::fg::green<< "Enter The Title of Course " << n - size << ":"; cin >> C[n - size - 1].Title;
 
          do{
-            cout << "Enter The Mark [0,20] of the Student in Course" << n - size << ":";
+            cout << rang::fg::green<< "Enter The Mark [0,20] of the Student in Course" << n - size << ":";
             cin >> C[n - size - 1].Mark;
         }while(C[n - size - 1].Mark < 0 || C[n - size - 1].Mark > 20);
         lenght += 1;
@@ -107,7 +111,7 @@ void marks_Display(Course *size)
 {
     int l = lenght;
     while (l) {
-        cout << lenght - l + 1 << ". Title: " << size[lenght - l].Title << ", Marks: " << size[lenght - l].Mark << endl;
+        cout << rang::fg::green<< lenght - l + 1 << ". Title: " << size[lenght - l].Title << ", Marks: " << size[lenght - l].Mark << endl;
         l--;
     }
 }
@@ -150,10 +154,10 @@ int marks_best(Course *size)
 int marks_bad(Course *size)
 {
     int l = lenght;
-    int bad = 0;
+    int bad = size[0].Mark;
     while (l) {
-        if (size[lenght - 1].Mark < bad) {
-            bad = size[lenght - 1].Mark;
+        if (size[lenght - l].Mark < bad) {
+            bad = size[lenght - l].Mark;
         }
         l--;
     }
@@ -167,8 +171,8 @@ marks_bellow_av(Course *size)
     int l = lenght;
     int av = marks_av(size);
     while (l) {
-        if (size[lenght -1].Mark < av) {
-            bel_av.push_back(size[lenght -  l].Mark);
+    if (size[lenght - l].Mark < av) {
+        bel_av.push_back(size[lenght - l].Mark);
         }
         l--;
     }
@@ -182,72 +186,67 @@ marks_above_av(Course *size)
     int l = lenght;
     int av = marks_av(size);
     while (l) {
-        if (size[lenght -1].Mark < av) {
-            ab_av.push_back(size[lenght -  l].Mark);
+    if (size[lenght - l].Mark < av) {
+        ab_av.push_back(size[lenght - l].Mark);
         }
         l--;
     }
     return ab_av;
 }
 
-
-
-
-
-
 //Stundent Manage
 void student_manage()
 {
     Date D;
-    cout << "-------- Student Manage------------" << endl;
-    cout << "Enter Year:";
+    cout << rang::fg::green<< "-------- Student Manage ------------" << endl;
+    cout << rang::fg::green<< "Enter Year:";
     cin >> D.year;
-    cout << "Enter Month:";
+    cout << rang::fg::green<< "Enter Month:";
     cin >> D.month;
-    cout << "Enter Day:";
+    cout << rang::fg::green<< "Enter Day:";
     cin >> D.day;
-    if(D.Valid()) cout << "The date is not Valid"<<endl;
+    if(D.Valid()) cout <<rang::fg::red<< "The date is not Valid"<<endl;
     D.print();
-    cout << " -------------------- Create a new Student ----------------------\n ";
-    cout << "Enter Name:";
+    cout << rang::fg::green<< " -------------------- Create a new Student ----------------------\n ";
+    cout << rang::fg::green<< "Enter Name:";
     string name;
     cin >> name;
-    cout << "Enter Username:";
+    cout << rang::fg::green<< "Enter Username:";
     string username;
     cin >> username;
-    cout << "Enter Address:";
+    cout << rang::fg::green<< "Enter Address:";
     string address;
     cin >> address;
-    cout << "Enter The Registrat Number:";
+    cout << rang::fg::green<< "Enter The Registrat Number:";
     int r = 0;
     cin >> r;
     int size =  0;
       do {
-        cout << "Enter Size [6,15] of Course:";
+        cout << rang::fg::green<< "Enter Size [6,15] of Course:";
         cin >> size;
     } while (size < 6 || size > 15);
     int n = size + 1;
     Course C[size];
     while (size > 0) {
-        cout << "---------- Course N"<< n - size<<" -------------" << endl;
+        cout << rang::fg::green<< "---------- Course N"<< n - size<<" -------------" << endl;
 
         do{
-            cout << "Enter The Credit :";
+            cout << rang::fg::green<< "Enter The Credit[2,5] :";
             cin >> C[n - size - 1].credit;
         } while(C[n - size - 1].credit < 2 || C[n - size - 1].credit > 5);
-        cout << "Enter The Title: ";
+        cout << rang::fg::green<< "Enter The Title: ";
         cin >> C[n - size - 1].Title;
 
         do{
-            cout << "Enter Mark:";
+            cout << rang::fg::green<< "Enter Mark [0,20]:";
             cin >> C[n - size - 1].Mark;
-        } while(C[n - size - 1].Mark < 0 || C[n - size - 1].Mark > 15);
+        } while(C[n - size - 1].Mark < 0 || C[n - size - 1].Mark > 20);
        
         size--;
     }
     Student S = Student(r, name, username, address, C, D);
     student_display(S);
-    cout << "Do You Wish To Modify Student Characteristics? Yes/No :";
+    cout << rang::fg::green<< "Do You Wish To Modify Student Characteristics? Yes/No :";
     string Answer;
     cin >> Answer;
     if (Answer == "yes" || Answer == "y"  || Answer == "Y" || Answer == "Yes") {
@@ -257,28 +256,28 @@ void student_manage()
 
 void student_display(Student S){
     cout<<"\n\n";
-    cout << "Name:" << S.name << endl;
-    cout << "UserName:" << S.username << endl;
-    cout << "Address:" << S.address << endl;
-    cout << "Registration Number:" << S.regstNum << endl;
+    cout << rang::fg::green<< "Name:" << S.name << endl;
+    cout << rang::fg::green<< "UserName:" << S.username << endl;
+    cout << rang::fg::green<< "Address:" << S.address << endl;
+    cout << rang::fg::green<< "Registration Number:" << S.regstNum << endl;
     S.date_Birth.print();
 }
 
 void change_character(Student S)
 {
-    cout << "Name:";
+    cout << rang::fg::green<< "Name:";
     cin >> S.name;
-    cout << "UserName:";
+    cout << rang::fg::green<< "UserName:";
     cin >> S.username;
     cout << "Address:";
     cin >> S.address;
-    cout << "Registrat Number:";
+    cout << rang::fg::green<< "Registrat Number:";
     cin >> S.regstNum;
-    cout << "Year:";
+    cout << rang::fg::green<< "Year:";
     cin >> S.date_Birth.year;
-    cout << "Month:";
+    cout << rang::fg::green<< "Month:";
     cin >> S.date_Birth.month;
-    cout << "Day:";
+    cout << rang::fg::green<< "Day:";
     cin >> S.date_Birth.day;
     student_display(S);
 }
@@ -287,7 +286,7 @@ vector<Student>
 stundent_manage_creat()
 {
     vector<Student> all;
-    cout << "Enter The Number of Students:";
+    cout << rang::fg::green<< "Enter The Number of Students: ";
     int n;
     cin >> n;
     int m = n + 1;
@@ -297,22 +296,23 @@ stundent_manage_creat()
     string address;
     Date dt;
     Course *course_marks = new Course();
-    assert(n > 0 && "Size must be greater than 0");
+    if(n < 0 )
+        cout << rang::fg::red<< "Size must be greater than 0";
     while (n) {
-        cout<< "---------- Student number :" << m - n << " -------------\n";
-        cout<< "Enter the name:";
+        cout<< rang::fg::green<< "---------- Student number :" << m - n << " -------------\n";
+        cout<< rang::fg::green<< "Enter the name:";
         cin >> name;
-        cout<< "Enter the surname:";
+        cout<< rang::fg::green<< "Enter the surname:";
         cin >> surname;
-        cout<< "Enter the Adrress:";
+        cout<< rang::fg::green<< "Enter the Adrress:";
         cin >> address;
-        cout<< "Enter the Registration Number:";
+        cout<< rang::fg::green<< "Enter the Registration Number:";
         cin >> regstNum;
-        cout<< "Enter the day of birth:";
+        cout<< rang::fg::green<< "Enter the day of birth:";
         cin >> dt.day;
-        cout<< "Enter the month of birth:";
+        cout<< rang::fg::green<< "Enter the month of birth:";
         cin >> dt.month;
-        cout<< "enter the year of birth:";
+        cout<< rang::fg::green<< "Enter the year of birth:";
         cin >> dt.year;
         course_marks = marks_manage_create();
         all.push_back(
@@ -324,15 +324,15 @@ stundent_manage_creat()
 
 void student_manage_display(vector<Student> v, int n)
 {
-    cout << "------------- Diplay " << n << " Students ----------"<< endl;
+    cout << rang::fg::green<< "------------- Diplay " << n << " Students ----------"<< endl;
     int m = n;
     while (m) {
-        cout << "Student Number " << n - m + 1 << endl;
-        cout << "Name:" << v[n - m].name << endl;
-        cout << "UserName:" << v[n - m].username << endl;
-        cout << "Address:" << v[n - m].address << endl;
+        cout << rang::fg::green<< "Student Number " << n - m + 1 << endl;
+        cout << rang::fg::green<< "Name:" << v[n - m].name << endl;
+        cout << rang::fg::green<< "UserName:" << v[n - m].username << endl;
+        cout << rang::fg::green<< "Address:" << v[n - m].address << endl;
         v[n - m].date_Birth.print();
-        cout << "--------------- Course ------------"<<endl;
+        cout << rang::fg::green<< "--------------- Course ------------"<<endl;
         marks_Display(v[ n - m ].courseMark);
         m--;
         
@@ -344,8 +344,8 @@ void student_av_mark_course(vector<Student> v)
      int n = v.size();
      int m = n;
      while (m) {
-         cout << "The Average Mark of " << v[n - m].name << " "
-         << v[n - m].username << " is "<< marks_av(v[n - m].courseMark);
+         cout << rang::fg::green<< "The Average Mark of " << v[n - m].name << " "
+         << v[n - m].username << " is "<< marks_av(v[n - m].courseMark)<<endl;
               m--;
      }
  }
@@ -357,9 +357,9 @@ student_best_mark_course(vector<Student> v)
      int n = v.size();
      int m = n;
      while (m) {
-         cout << "The Best Mark of " << v[n - m].name << " "
+         cout << rang::fg::green<< "The Best Mark of " << v[n - m].name << " "
          << v[n - m].username<< " is "
-         << marks_best(v[n - m].courseMark);
+         << marks_best(v[n - m].courseMark)<<endl;
               m--;
      }
  }
@@ -371,7 +371,7 @@ student_bad_mark_course(vector<Student> v)
      int n = v.size();
      int m = n;
      while (m) {
-         cout << "The Bad Mark of " << v[n - m].name << " "
+         cout << rang::fg::green<< "The Bad Mark of " << v[n - m].name << " "
               << v[n - m].username << " is "
          << marks_bad(v[n - m].courseMark)<<endl;
               m--;
@@ -406,22 +406,22 @@ bool loop=true;
     menu.add("Bad Student Management Of Each Course");
     menu.endOfRow();
     menu.add("Enter 8 to");
-    menu.add("Close");
+    menu.add("Exit");
     menu.endOfRow();
     menu.setAlignment(0, TextTable::Alignment::LEFT);
     t.setAlignment(2, TextTable::Alignment::LEFT);
-    cout << t << menu;
+    cout << rang::fg::green <<  t << rang::fg::blue <<  menu;
     int choice;
     int n;
     while (loop) {
-        cout << "Enter your choice :";
+        cout << rang::fg::red<< "Enter your choice: ";
         cin >> choice;
         switch (choice) {
             case 1:
                 Nst=stundent_manage_creat();
                 break;
             case 2:
-                 cout<< "Enter the number N of students to display: ";
+                 cout<< rang::fg::cyan << "Enter the number N of students to display: ";
                  cin >> n;
                 student_manage_display(Nst,n);
                  break;
@@ -435,20 +435,19 @@ bool loop=true;
                 student_bad_mark_course(Nst);
                   break;
             case 6:
-                  cout<< "coming soon\n";
+                  cout<<rang::fg::red<< "coming soon\n";
                   break;
             case 7:
-                  cout<<"coming soon\n";
+                  cout<<rang::fg::red<<"coming soon\n";
                   break;
             case 8:
-                  loop=false;
-                  break;
+                 loop=false;
+            break;
             default:
                  continue;
                  break;
 
         }
- 
 }
 }
 
@@ -471,17 +470,22 @@ void menu_Display()
     menu.add("Class student Management");
     menu.endOfRow();
     menu.add("Enter 5 to");
+    menu.add("Menu Principal");
+    menu.endOfRow();
+    menu.add("Enter 6 to");
     menu.add("Exit");
     menu.endOfRow();
     menu.setAlignment(0, TextTable::Alignment::LEFT);
     t.setAlignment(2, TextTable::Alignment::LEFT);
-    cout << t << menu;
+    cout << rang::fg::green<< t <<rang::fg::blue<< menu;
 }
 void principal()
 {
     bool loop = true;
+    
     while (loop) {
-        cout << "Enter Choice:";
+        menu_Display();
+        cout << rang::fg::red<< "Enter Your Choice:";
         int n;
         cin >> n;
         switch (n) {
@@ -498,10 +502,13 @@ void principal()
                 student_manage_menu();
                 break;
             case 5:
-                loop=false;
+                menu_Display();
                 break;
+            case 6:
+            loop=false;
+            break;
             default:
-                cout << "Good Bye!!!!";
+                cout << rang::fg::magenta<< "Good Bye!!!!";
                 break;
         }
     }
@@ -554,14 +561,14 @@ marks_menu()
     menu.add("Marks Management Below Average");
     menu.endOfRow();
     menu.add("Enter 8 to");
-    menu.add("CLose");
+    menu.add("Exit");
     menu.endOfRow();
     menu.setAlignment(0, TextTable::Alignment::LEFT);
     t.setAlignment(2, TextTable::Alignment::LEFT);
-    cout << t << menu;
+    cout <<rang::fg::green<< t <<rang::fg::blue<< menu;
     int choice;
     while (loop) {
-        cout << "Enter your choice> ";
+        cout << rang::fg::red<<"Enter Your Choice: ";
         cin >> choice;
         switch (choice) {
             case 1:
@@ -572,15 +579,15 @@ marks_menu()
                 break;
             case 3:
                 capture = marks_av(marks);
-                cout << "The Average mark is" << capture << "\n";
+                cout << rang::fg::green<< "The Average mark is :" << capture << "\n";
                 break;
             case 4:
                 capture = marks_best(marks);
-                cout << "The best mark is" << capture << endl;
+                cout << rang::fg::green<< "The best mark is :" << capture << endl;
                 break;
             case 5:
                 capture = marks_bad(marks);
-                cout <<"The Worst mark is" << capture << endl;
+                cout << rang::fg::green<< "The Worst mark is :" << capture << endl;
                 break;
             case 6:
                 print_vec(marks_above_av(marks));
@@ -589,10 +596,10 @@ marks_menu()
                 print_vec(marks_bellow_av(marks));
                 break;
             case 8:
-                loop = false;
-                break;
+            loop = false;
+            break;
             default:
-                continue;
+                cout << rang::fg::magenta<<"Good bye!!!";
                 break;
         }
     }
@@ -600,8 +607,8 @@ marks_menu()
 
 int main()
 {
-    cout<< "School Managemt system"<<endl;
-    menu_Display();
+    cout<< rang::fg::cyan<<"School Managemt system"<<endl;
+    //menu_Display();
     principal();
 }
 
