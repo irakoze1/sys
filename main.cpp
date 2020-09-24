@@ -11,8 +11,10 @@
 #include <vector>
 #include <cstring>
 #include "TextTable.h"
-//#include "rang.hpp"
+#include "progress.h"
+#include "rang.hpp"
 using namespace std;
+using namespace rang;
 
 //Declare All procedure and function we need
 void menu_Display();
@@ -50,35 +52,35 @@ void student_display(Student S);
 //create course
 void course_credit_manage()
 {
-    cout << rang::fg::green << "------- Course Credit Manage --------- \n";
+    cout << fg::green << "------- Course Credit Manage --------- \n";
     int size = 0;
     do {
-        cout << rang::fg::green << "Enter Size [6,15]:";
+        cout << fg::green << "Enter Size [6,15]:";
         cin >> size;
     } while (size < 6 || size > 15);
     int n = size + 1;
     int sum = 0;
     Course C[size];
     while (size > 0) {
-        cout << rang::fg::green << "--------- Course N0" << n - size <<" ------------"<< endl;
+        cout << fg::green << "--------- Course N0" << n - size <<" ------------"<< endl;
         
         do{
                 cout << rang::fg::green << "Enter The Credit [2,5]:";
                 cin >> C[n - size - 1].credit;
         }while(C[n - size - 1].credit < 2 || C[n - size - 1].credit > 5);
-        cout << rang::fg::green << "Enter The Title: ";
+        cout << fg::green << "Enter The Title: ";
         cin >> C[n - size - 1].Title;
         
         sum += C[n - size - 1].credit;
         size--;
     }
-    if(sum != 30) cout <<rang::fg::red << "Credit Must be equal 30 "<<endl;
+    if(sum != 30) cout <<fg::red << "Credit Must be equal 30 "<<endl;
     size = n - 1;
     
-    cout << rang::fg::green << "----------------- Result --------------"<<endl;
+    cout << fg::green << "----------------- Result --------------"<<endl;
     while (size > 0) {
-        cout << rang::fg::green << "Course " << n - size << " Title: " << C[n - size - 1].Title<<endl;
-        cout << rang::fg::green << "Course " << n - size << " Credit: "<< C[n- size - 1].credit<<endl;
+        cout << fg::green << "Course " << n - size << " Title: " << C[n - size - 1].Title<<endl;
+        cout << fg::green << "Course " << n - size << " Credit: "<< C[n- size - 1].credit<<endl;
         size--;
     }
 }
@@ -607,6 +609,30 @@ marks_menu()
 
 int main()
 {
+    int N = 2000;
+        tqdm bar;
+        cout<<rang::fg::green<<"Loading..."<<endl;
+        bar.set_theme_braille();
+        for(int i = 0; i < N; i++) {
+            bar.progress(i, N);
+            usleep(1000);
+        }
+        bar.finish();
+        string s=R"(
+         _______   ______  __    __         ______    __                      __                        __      __       __                                                                              __
+        /       \ /      |/  |  /  |       /      \  /  |                    /  |                      /  |    /  \     /  |                                                                            /  |
+        $$$$$$$  |$$$$$$/ $$ |  $$ |      /$$$$$$  |_$$ |_    __    __   ____$$ |  ______   _______   _$$ |_   $$  \   /$$ |  ______   _______    ______    ______   _____  ____    ______   _______   _$$ |_
+        $$ |__$$ |  $$ |  $$ |  $$ |      $$ \__$$// $$   |  /  |  /  | /    $$ | /      \ /       \ / $$   |  $$$  \ /$$$ | /      \ /       \  /      \  /      \ /     \/    \  /      \ /       \ / $$   |
+        $$    $$<   $$ |  $$ |  $$ |      $$      \$$$$$$/   $$ |  $$ |/$$$$$$$ |/$$$$$$  |$$$$$$$  |$$$$$$/   $$$$  /$$$$ | $$$$$$  |$$$$$$$  | $$$$$$  |/$$$$$$  |$$$$$$ $$$$  |/$$$$$$  |$$$$$$$  |$$$$$$/
+        $$$$$$$  |  $$ |  $$ |  $$ |       $$$$$$  | $$ | __ $$ |  $$ |$$ |  $$ |$$    $$ |$$ |  $$ |  $$ | __ $$ $$ $$/$$ | /    $$ |$$ |  $$ | /    $$ |$$ |  $$ |$$ | $$ | $$ |$$    $$ |$$ |  $$ |  $$ | __
+        $$ |__$$ | _$$ |_ $$ \__$$ |      /  \__$$ | $$ |/  |$$ \__$$ |$$ \__$$ |$$$$$$$$/ $$ |  $$ |  $$ |/  |$$ |$$$/ $$ |/$$$$$$$ |$$ |  $$ |/$$$$$$$ |$$ \__$$ |$$ | $$ | $$ |$$$$$$$$/ $$ |  $$ |  $$ |/  |
+        $$    $$/ / $$   |$$    $$/       $$    $$/  $$  $$/ $$    $$/ $$    $$ |$$       |$$ |  $$ |  $$  $$/ $$ | $/  $$ |$$    $$ |$$ |  $$ |$$    $$ |$$    $$ |$$ | $$ | $$ |$$       |$$ |  $$ |  $$  $$/
+        $$$$$$$/  $$$$$$/  $$$$$$/         $$$$$$/    $$$$/   $$$$$$/   $$$$$$$/  $$$$$$$/ $$/   $$/    $$$$/  $$/      $$/  $$$$$$$/ $$/   $$/  $$$$$$$/  $$$$$$$ |$$/  $$/  $$/  $$$$$$$/ $$/   $$/    $$$$/
+                                                                                                                                                          /  \__$$ |
+                                                                                                                                                          $$    $$/
+                                                                                                                                                           $$$$$$/
+)";
+
     cout<< rang::fg::cyan<<"School Managemt system"<<endl;
     //menu_Display();
     principal();
