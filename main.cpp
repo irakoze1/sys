@@ -54,35 +54,55 @@ void course_credit_manage()
 {
     cout << fg::green << "------- Course Credit Manage --------- \n";
     int size = 0;
+    int index = 0;
     do {
         cout << fg::green << "Enter Size [6,15]:";
         cin >> size;
     } while (size < 6 || size > 15);
     int n = size + 1;
+    
     int sum = 0;
+    
     Course C[size];
     while (size > 0) {
         cout << fg::green << "--------- Course N0" << n - size <<" ------------"<< endl;
         
         do{
-                cout << rang::fg::green << "Enter The Credit [2,5]:";
+                cout << rang::fg::green << "Enter The Credit Between 2 And 5 ("<< 30 - sum << " remains): ";
                 cin >> C[n - size - 1].credit;
         }while(C[n - size - 1].credit < 2 || C[n - size - 1].credit > 5);
+        
         cout << fg::green << "Enter The Title: ";
         cin >> C[n - size - 1].Title;
-        
         sum += C[n - size - 1].credit;
         size--;
     }
-    if(sum != 30) cout <<fg::red << "Credit Must be equal 30 "<<endl;
+    
     size = n - 1;
     
+    loop:
     cout << fg::green << "----------------- Result --------------"<<endl;
-    while (size > 0) {
-        cout << fg::green << "Course " << n - size << " Title: " << C[n - size - 1].Title<<endl;
-        cout << fg::green << "Course " << n - size << " Credit: "<< C[n- size - 1].credit<<endl;
-        size--;
+    for (int i = 0; i<size; i++) {
+        cout << fg::green << "Course " << i+1 << " Title: " << C[i].Title << " Credit: "<< C[i].credit<<endl;
     }
+    
+    if(sum != 30){
+        cout <<fg::red << "Credit Must be equal 30 "<<endl;
+        cout <<fg::red << "Which Course do you want to Edit?:";
+        cin >> index;
+        
+        Course ti = C[index-1];
+        sum -= ti.credit;
+        
+        cout << fg::green << "Enter new Credit for " << ti.Title << ":";
+        cin >> ti.credit;
+        C[index-1] = ti;
+        
+        sum +=ti.credit;
+        
+        goto loop;
+    }
+    
 }
 
 
@@ -457,7 +477,7 @@ void menu_Display()
 {
     TextTable t('-', '|', '#');
     t.add("List Of Available Operations");
-    TextTable menu('-', ' ', ' ');
+    TextTable menu('-', '|', '+');
     t.endOfRow();
     menu.add("Enter 1 for");
     menu.add("Course Credit Management");
@@ -472,9 +492,6 @@ void menu_Display()
     menu.add("Class student Management");
     menu.endOfRow();
     menu.add("Enter 5 to");
-    menu.add("Menu Principal");
-    menu.endOfRow();
-    menu.add("Enter 6 to");
     menu.add("Exit");
     menu.endOfRow();
     menu.setAlignment(0, TextTable::Alignment::LEFT);
@@ -504,9 +521,6 @@ void principal()
                 student_manage_menu();
                 break;
             case 5:
-                menu_Display();
-                break;
-            case 6:
             loop=false;
             break;
             default:
@@ -539,7 +553,7 @@ marks_menu()
     int capture;
     TextTable t('-', '|', '#');
     t.add("Marks Management Menu");
-    TextTable menu('-', ' ', ' ');
+    TextTable menu('-', '|', '+');
     t.endOfRow();
     menu.add("Enter 1 for");
     menu.add("Marks Management Creation");
